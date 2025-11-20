@@ -1,0 +1,39 @@
+package es.cifpcarlos3;
+
+import es.cifpcarlos3.file.readers.FileReader;
+import es.cifpcarlos3.models.Course;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+
+public class Main {
+
+    private static final String DAM_FILE_NAME = "lista_alumnado_DAM2.txt";
+    private static final String DAW_FILE_NAME = "lista_alumnado_DAW1.csv";
+
+    private static final String DAM_COURSE_NAME = "DAM";
+    private static final String DAW_COURSE_NAME = "DAW";
+
+    private static final String DAM_FILE_SEPARATOR = ",";
+    private static final String DAW_FILE_SEPARATOR = ";";
+
+    private static final String CITY_FILTER = "Cartagena";
+
+    public static void main(String[] args) {
+        Path rootProjectPath = Paths.get("").toAbsolutePath();
+
+        System.out.println("---------------------DAM-----------------------");
+        Course damCourse = FileReader.createCourseFromFile(
+                rootProjectPath.resolve(DAM_FILE_NAME),
+                DAM_COURSE_NAME,
+                DAM_FILE_SEPARATOR,
+                CITY_FILTER);
+
+        System.out.println("---------------------DAW-----------------------");
+        Course dawCourse = FileReader.createCourseFromFile(
+                rootProjectPath.resolve(DAW_FILE_NAME),
+                DAW_COURSE_NAME,
+                DAW_FILE_SEPARATOR,
+                CITY_FILTER);
+    }
+}
