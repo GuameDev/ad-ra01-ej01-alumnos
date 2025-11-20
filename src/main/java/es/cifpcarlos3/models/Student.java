@@ -1,4 +1,4 @@
-package es.cifpcarlos3;
+package es.cifpcarlos3.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class Student {
-    private int id;
+    private String id;
     private String surnames;
     private String name;
     private String city;

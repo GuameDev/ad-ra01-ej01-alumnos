@@ -1,4 +1,4 @@
-package es.cifpcarlos3;
+package es.cifpcarlos3.models;
 
 import lombok.Data;
 
