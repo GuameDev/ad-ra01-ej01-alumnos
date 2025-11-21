@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @JsonRootName("alumno")
 public class Student implements Serializable {
     @JsonProperty(value = "id")
-    private String id;
+    private int id;
 
     @JsonProperty(value = "apellidos")
     private String surnames;

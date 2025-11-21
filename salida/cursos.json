@@ -8,7 +8,7 @@
             "ciudad": "Cartagena",
             "edad": 29,
             "fechaRegistro": "2025-11-21",
-            "id": "1",
+            "id": 1,
             "nombre": "Manuel"
           },
           {
@@ -16,7 +16,7 @@
             "ciudad": "Cartagena",
             "edad": 23,
             "fechaRegistro": "2025-11-21",
-            "id": "2",
+            "id": 2,
             "nombre": "Lucía"
           },
           {
@@ -24,7 +24,7 @@
             "ciudad": "Cartagena",
             "edad": 32,
             "fechaRegistro": "2025-11-21",
-            "id": "3",
+            "id": 3,
             "nombre": "Javier"
           },
           {
@@ -32,7 +32,7 @@
             "ciudad": "Cartagena",
             "edad": 21,
             "fechaRegistro": "2025-11-21",
-            "id": "4",
+            "id": 4,
             "nombre": "Carmen"
           },
           {
@@ -40,7 +40,7 @@
             "ciudad": "Cartagena",
             "edad": 27,
             "fechaRegistro": "2025-11-21",
-            "id": "5",
+            "id": 5,
             "nombre": "David"
           },
           {
@@ -48,7 +48,7 @@
             "ciudad": "Cartagena",
             "edad": 30,
             "fechaRegistro": "2025-11-21",
-            "id": "6",
+            "id": 6,
             "nombre": "Ana"
           },
           {
@@ -56,7 +56,7 @@
             "ciudad": "Cartagena",
             "edad": 22,
             "fechaRegistro": "2025-11-21",
-            "id": "8",
+            "id": 8,
             "nombre": "Laura"
           },
           {
@@ -64,7 +64,7 @@
             "ciudad": "Cartagena",
             "edad": 28,
             "fechaRegistro": "2025-11-21",
-            "id": "9",
+            "id": 9,
             "nombre": "Sergio"
           },
           {
@@ -72,7 +72,7 @@
             "ciudad": "Cartagena",
             "edad": 24,
             "fechaRegistro": "2025-11-21",
-            "id": "10",
+            "id": 10,
             "nombre": "Elena"
           },
           {
@@ -80,7 +80,7 @@
             "ciudad": "Cartagena",
             "edad": 26,
             "fechaRegistro": "2025-11-21",
-            "id": "12",
+            "id": 12,
             "nombre": "Beatriz"
           },
           {
@@ -88,7 +88,7 @@
             "ciudad": "Cartagena",
             "edad": 20,
             "fechaRegistro": "2025-11-21",
-            "id": "14",
+            "id": 14,
             "nombre": "Paula"
           },
           {
@@ -96,7 +96,7 @@
             "ciudad": "Cartagena",
             "edad": 35,
             "fechaRegistro": "2025-11-21",
-            "id": "15",
+            "id": 15,
             "nombre": "Andrés"
           },
           {
@@ -104,7 +104,7 @@
             "ciudad": "Cartagena",
             "edad": 19,
             "fechaRegistro": "2025-11-21",
-            "id": "16",
+            "id": 16,
             "nombre": "Patricia"
           },
           {
@@ -112,7 +112,7 @@
             "ciudad": "Cartagena",
             "edad": 40,
             "fechaRegistro": "2025-11-21",
-            "id": "17",
+            "id": 17,
             "nombre": "Alberto"
           },
           {
@@ -120,7 +120,7 @@
             "ciudad": "Cartagena",
             "edad": 38,
             "fechaRegistro": "2025-11-21",
-            "id": "19",
+            "id": 19,
             "nombre": "Carlos"
           },
           {
@@ -128,7 +128,7 @@
             "ciudad": "Cartagena",
             "edad": 21,
             "fechaRegistro": "2025-11-21",
-            "id": "20",
+            "id": 20,
             "nombre": "Irene"
           },
           {
@@ -136,7 +136,7 @@
             "ciudad": "Cartagena",
             "edad": 36,
             "fechaRegistro": "2025-11-21",
-            "id": "21",
+            "id": 21,
             "nombre": "Víctor"
           },
           {
@@ -144,7 +144,7 @@
             "ciudad": "Cartagena",
             "edad": 23,
             "fechaRegistro": "2025-11-21",
-            "id": "22",
+            "id": 22,
             "nombre": "Alba"
           },
           {
@@ -152,7 +152,7 @@
             "ciudad": "Cartagena",
             "edad": 27,
             "fechaRegistro": "2025-11-21",
-            "id": "23",
+            "id": 23,
             "nombre": "Daniel"
           },
           {
@@ -160,7 +160,7 @@
             "ciudad": "Cartagena",
             "edad": 41,
             "fechaRegistro": "2025-11-21",
-            "id": "25",
+            "id": 25,
             "nombre": "Luis"
           },
           {
@@ -168,7 +168,7 @@
             "ciudad": "Cartagena",
             "edad": 24,
             "fechaRegistro": "2025-11-21",
-            "id": "26",
+            "id": 26,
             "nombre": "Marta"
           },
           {
@@ -176,7 +176,7 @@
             "ciudad": "Cartagena",
             "edad": 22,
             "fechaRegistro": "2025-11-21",
-            "id": "27",
+            "id": 27,
             "nombre": "Hugo"
           },
           {
@@ -184,7 +184,7 @@
             "ciudad": "Cartagena",
             "edad": 25,
             "fechaRegistro": "2025-11-21",
-            "id": "28",
+            "id": 28,
             "nombre": "Claudia"
           },
           {
@@ -192,7 +192,7 @@
             "ciudad": "Cartagena",
             "edad": 20,
             "fechaRegistro": "2025-11-21",
-            "id": "30",
+            "id": 30,
             "nombre": "Nuria"
           }
         ],
@@ -205,7 +205,7 @@
             "ciudad": "Cartagena",
             "edad": 26,
             "fechaRegistro": "2025-11-21",
-            "id": "﻿1",
+            "id": 1,
             "nombre": "Marcos"
           },
           {
@@ -213,7 +213,7 @@
             "ciudad": "Cartagena",
             "edad": 23,
             "fechaRegistro": "2025-11-21",
-            "id": "2",
+            "id": 2,
             "nombre": "Beatriz"
           },
           {
@@ -221,7 +221,7 @@
             "ciudad": "Cartagena",
             "edad": 28,
             "fechaRegistro": "2025-11-21",
-            "id": "3",
+            "id": 3,
             "nombre": "Sergio"
           },
           {
@@ -229,7 +229,7 @@
             "ciudad": "Cartagena",
             "edad": 24,
             "fechaRegistro": "2025-11-21",
-            "id": "4",
+            "id": 4,
             "nombre": "Lucía"
           },
           {
@@ -237,7 +237,7 @@
             "ciudad": "Cartagena",
             "edad": 21,
             "fechaRegistro": "2025-11-21",
-            "id": "6",
+            "id": 6,
             "nombre": "Carmen"
           },
           {
@@ -245,7 +245,7 @@
             "ciudad": "Cartagena",
             "edad": 29,
             "fechaRegistro": "2025-11-21",
-            "id": "7",
+            "id": 7,
             "nombre": "Andrés"
           },
           {
@@ -253,7 +253,7 @@
             "ciudad": "Cartagena",
             "edad": 22,
             "fechaRegistro": "2025-11-21",
-            "id": "8",
+            "id": 8,
             "nombre": "Paula"
           },
           {
@@ -261,7 +261,7 @@
             "ciudad": "Cartagena",
             "edad": 25,
             "fechaRegistro": "2025-11-21",
-            "id": "9",
+            "id": 9,
             "nombre": "Adriana"
           },
           {
@@ -269,7 +269,7 @@
             "ciudad": "Cartagena",
             "edad": 20,
             "fechaRegistro": "2025-11-21",
-            "id": "10",
+            "id": 10,
             "nombre": "Hugo"
           },
           {
@@ -277,7 +277,7 @@
             "ciudad": "Cartagena",
             "edad": 31,
             "fechaRegistro": "2025-11-21",
-            "id": "11",
+            "id": 11,
             "nombre": "Marta"
           },
           {
@@ -285,7 +285,7 @@
             "ciudad": "Cartagena",
             "edad": 19,
             "fechaRegistro": "2025-11-21",
-            "id": "12",
+            "id": 12,
             "nombre": "Patricia"
           },
           {
@@ -293,7 +293,7 @@
             "ciudad": "Cartagena",
             "edad": 24,
             "fechaRegistro": "2025-11-21",
-            "id": "14",
+            "id": 14,
             "nombre": "Irene"
           },
           {
@@ -301,7 +301,7 @@
             "ciudad": "Cartagena",
             "edad": 30,
             "fechaRegistro": "2025-11-21",
-            "id": "15",
+            "id": 15,
             "nombre": "Alejandro"
           },
           {
@@ -309,7 +309,7 @@
             "ciudad": "Cartagena",
             "edad": 32,
             "fechaRegistro": "2025-11-21",
-            "id": "16",
+            "id": 16,
             "nombre": "Laura"
           },
           {
@@ -317,7 +317,7 @@
             "ciudad": "Cartagena",
             "edad": 27,
             "fechaRegistro": "2025-11-21",
-            "id": "17",
+            "id": 17,
             "nombre": "David"
           },
           {
@@ -325,7 +325,7 @@
             "ciudad": "Cartagena",
             "edad": 23,
             "fechaRegistro": "2025-11-21",
-            "id": "18",
+            "id": 18,
             "nombre": "Elena"
           },
           {
@@ -333,7 +333,7 @@
             "ciudad": "Cartagena",
             "edad": 25,
             "fechaRegistro": "2025-11-21",
-            "id": "20",
+            "id": 20,
             "nombre": "Claudia"
           },
           {
@@ -341,7 +341,7 @@
             "ciudad": "Cartagena",
             "edad": 20,
             "fechaRegistro": "2025-11-21",
-            "id": "22",
+            "id": 22,
             "nombre": "Nuria"
           },
           {
@@ -349,7 +349,7 @@
             "ciudad": "Cartagena",
             "edad": 28,
             "fechaRegistro": "2025-11-21",
-            "id": "23",
+            "id": 23,
             "nombre": "Alberto"
           },
           {
@@ -357,7 +357,7 @@
             "ciudad": "Cartagena",
             "edad": 26,
             "fechaRegistro": "2025-11-21",
-            "id": "25",
+            "id": 25,
             "nombre": "Daniel"
           },
           {
@@ -365,7 +365,7 @@
             "ciudad": "Cartagena",
             "edad": 37,
             "fechaRegistro": "2025-11-21",
-            "id": "27",
+            "id": 27,
             "nombre": "Iván"
           },
           {
@@ -373,7 +373,7 @@
             "ciudad": "Cartagena",
             "edad": 24,
             "fechaRegistro": "2025-11-21",
-            "id": "28",
+            "id": 28,
             "nombre": "Lucía"
           },
           {
@@ -381,7 +381,7 @@
             "ciudad": "Cartagena",
             "edad": 41,
             "fechaRegistro": "2025-11-21",
-            "id": "29",
+            "id": 29,
             "nombre": "Pablo"
           },
           {
@@ -389,7 +389,7 @@
             "ciudad": "Cartagena",
             "edad": 21,
             "fechaRegistro": "2025-11-21",
-            "id": "30",
+            "id": 30,
             "nombre": "Ana"
           },
           {
@@ -397,7 +397,7 @@
             "ciudad": "Cartagena",
             "edad": 30,
             "fechaRegistro": "2025-11-21",
-            "id": "31",
+            "id": 31,
             "nombre": "Víctor"
           },
           {
@@ -405,7 +405,7 @@
             "ciudad": "Cartagena",
             "edad": 38,
             "fechaRegistro": "2025-11-21",
-            "id": "33",
+            "id": 33,
             "nombre": "José"
           },
           {
@@ -413,7 +413,7 @@
             "ciudad": "Cartagena",
             "edad": 28,
             "fechaRegistro": "2025-11-21",
-            "id": "36",
+            "id": 36,
             "nombre": "Elena"
           }
         ],
