@@ -5,6 +5,7 @@ import es.cifpcarlos3.file.readers.FileReader;
 import es.cifpcarlos3.file.writers.BinaryFileWriter;
 import es.cifpcarlos3.file.writers.FileWriter;
 import es.cifpcarlos3.file.writers.JsonFileWriter;
+import es.cifpcarlos3.file.writers.XmlFileWriter;
 import es.cifpcarlos3.models.Course;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,10 +29,13 @@ public class Main {
     private static final String OUTPUT_FOLDER = "salida";
 
     //Nombres de fichero
-    private static final String STUDENTS_DAT = "cursos.dat";
-    private static final String CURSOS_JSON = "cursos.json";
+    private static final String COURSES_DAT = "cursos.dat";
+    private static final String COURSES_JSON = "cursos.json";
+    public static final String COURSES_XML = "cursos.xml";
+
     private static final String DAM_JSON = "dam2.json";
     private static final String DAW_JSON = "daw1.json";
+
 
     public static void main(String[] args) {
         Path rootProjectPath = Paths.get("").toAbsolutePath();
@@ -43,6 +47,9 @@ public class Main {
         //JSON
         FileWriter<CreateCourseJsonFileDto> coursesJsonFileWriter = new JsonFileWriter<>();
         FileWriter<Course> courseJsonFileWriter = new JsonFileWriter<>();
+
+        //XML
+        FileWriter<CreateCourseJsonFileDto> courseXmlFileWriter = new XmlFileWriter<>();
 
 
         System.out.println("---------------------DAM-----------------------");
@@ -64,16 +71,19 @@ public class Main {
                 dawCourse);
 
         //Binario conjunto
-        coursesBinaryFileWriter.saveFile(courses, outputPath.resolve(STUDENTS_DAT));
+        coursesBinaryFileWriter.saveFile(courses, outputPath.resolve(COURSES_DAT));
 
         //JSON conjunto
         CreateCourseJsonFileDto dto = new CreateCourseJsonFileDto();
         dto.courses = courses;
 
-        coursesJsonFileWriter.saveFile(dto, outputPath.resolve(CURSOS_JSON));
+        coursesJsonFileWriter.saveFile(dto, outputPath.resolve(COURSES_JSON));
 
         //JSON separados
         courseJsonFileWriter.saveFile(damCourse, outputPath.resolve(DAM_JSON));
         courseJsonFileWriter.saveFile(dawCourse, outputPath.resolve(DAW_JSON));
+
+        //XML
+        courseXmlFileWriter.saveFile(dto,outputPath.resolve(COURSES_XML));
     }
 }
