@@ -1,15 +1,12 @@
 package es.cifpcarlos3.file.writers;
 
-import es.cifpcarlos3.models.Course;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 
-public class BinaryFileWriter implements FileWriter{
+public class BinaryFileWriter<T> implements FileWriter<T>{
     @Override
-    public void saveFile(List<Course> courses, Path filePath) {
+    public void saveFile(T courses, Path filePath) {
         createFile(filePath);
 
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath.toFile());
@@ -20,7 +17,6 @@ public class BinaryFileWriter implements FileWriter{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private static void createFile(Path filePath) {
