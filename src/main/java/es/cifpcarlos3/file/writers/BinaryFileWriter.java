@@ -7,12 +7,14 @@ import java.nio.file.Path;
 public class BinaryFileWriter<T> implements FileWriter<T>{
     @Override
     public void saveFile(T data, Path filePath) {
+        System.out.println("Generando fichero: " + filePath.getFileName() + "...");
         createFile(filePath);
 
         try (FileOutputStream fileOutputStream = new FileOutputStream(filePath.toFile());
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)){
 
             objectOutputStream.writeObject(data);
+            System.out.println("Fichero generado: " + filePath.getFileName());
 
         } catch (IOException e) {
             throw new RuntimeException(e);

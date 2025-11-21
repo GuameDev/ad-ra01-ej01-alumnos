@@ -40,7 +40,6 @@ public class Main {
     private static final String DAM_JSON = "dam2.json";
     private static final String DAW_JSON = "daw1.json";
 
-
     public static void main(String[] args) {
         Path rootProjectPath = Paths.get("").toAbsolutePath();
         Path outputPath = rootProjectPath.resolve(OUTPUT_FOLDER);
@@ -56,12 +55,14 @@ public class Main {
         FileWriter<CreateCourseJsonFileDto> courseXmlFileWriter = new XmlFileWriter<>();
 
 
+        //Leer fichero de DAM
         System.out.println("---------------------DAM-----------------------");
         Course damCourse = FileReader.createCourseFromFile(
                 rootProjectPath.resolve(DAM_FILE_NAME),
                 DAM_COURSE_NAME,
                 DAM_FILE_SEPARATOR,
                 CITY_FILTER);
+        System.out.println("---------------------DAM-----------------------");
 
         System.out.println("---------------------DAW-----------------------");
         Course dawCourse = FileReader.createCourseFromFile(
@@ -69,7 +70,9 @@ public class Main {
                 DAW_COURSE_NAME,
                 DAW_FILE_SEPARATOR,
                 CITY_FILTER);
+        System.out.println("---------------------DAW-----------------------");
 
+        //Lista de cursos unificada
         List<Course> courses = List.of(
                 damCourse,
                 dawCourse);
@@ -80,7 +83,6 @@ public class Main {
         //JSON conjunto
         CreateCourseJsonFileDto dto = new CreateCourseJsonFileDto();
         dto.courses = courses;
-
         coursesJsonFileWriter.saveFile(dto, outputPath.resolve(COURSES_JSON));
 
         //JSON separados

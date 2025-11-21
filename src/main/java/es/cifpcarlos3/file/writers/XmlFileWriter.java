@@ -11,14 +11,15 @@ import java.nio.file.Path;
 public class XmlFileWriter<T> implements FileWriter<T>{
     @Override
     public void saveFile(T data, Path filePath) {
-         createFile(filePath);
+        System.out.println("Generando fichero: " + filePath.getFileName() + "...");
+        createFile(filePath);
         var xmlMapper = XmlMapper.builder() // Inicio del objeto XmlMapper
                 .enable(SerializationFeature.INDENT_OUTPUT) // Salida XML con formato
                 .build();
 
         try ( OutputStream outputStream = Files.newOutputStream(filePath) ) {
             xmlMapper.writeValue(outputStream, data);
-
+            System.out.println("Fichero generado: " + filePath.getFileName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

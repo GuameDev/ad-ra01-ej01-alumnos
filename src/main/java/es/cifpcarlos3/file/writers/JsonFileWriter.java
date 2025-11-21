@@ -11,7 +11,7 @@ import java.nio.file.Path;
 public class JsonFileWriter<T> implements FileWriter<T> {
     @Override
     public void saveFile(T data, Path filePath) {
-
+        System.out.println("Generando fichero: " + filePath.getFileName() + "...");
         createFile(filePath);
 
         var mapper = JsonMapper.builder()
@@ -20,6 +20,7 @@ public class JsonFileWriter<T> implements FileWriter<T> {
                 .build();
 
         mapper.writeValue(filePath, data);
+        System.out.println("Fichero generado: " + filePath.getFileName());
     }
 
     private static void createFile(Path filePath) {
