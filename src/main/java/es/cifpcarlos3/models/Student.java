@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,6 +15,10 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @JsonRootName("alumno")
+@ToString(
+        includeFieldNames = false,
+        doNotUseGetters = true
+)
 public class Student implements Serializable {
     @JsonProperty(value = "id")
     private int id;
