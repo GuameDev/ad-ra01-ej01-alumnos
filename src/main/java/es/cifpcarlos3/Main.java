@@ -1,7 +1,7 @@
 package es.cifpcarlos3;
 
 import es.cifpcarlos3.file.dtos.CreateCourseJsonFileDto;
-import es.cifpcarlos3.file.readers.FileReader;
+import es.cifpcarlos3.file.CourseFileLoader;
 import es.cifpcarlos3.file.writers.BinaryFileWriter;
 import es.cifpcarlos3.file.writers.FileWriter;
 import es.cifpcarlos3.file.writers.JsonFileWriter;
@@ -41,7 +41,10 @@ public class Main {
     private static final String DAW_JSON = "daw1.json";
 
     public static void main(String[] args) {
+        //Ruta por defecto del proyecto
         Path rootProjectPath = Paths.get("").toAbsolutePath();
+
+        //Ruta de la carpeta de salida
         Path outputPath = rootProjectPath.resolve(OUTPUT_FOLDER);
 
         //Binario
@@ -57,15 +60,17 @@ public class Main {
 
         //Leer fichero de DAM
         System.out.println("---------------------DAM-----------------------");
-        Course damCourse = FileReader.createCourseFromFile(
+
+        Course damCourse = CourseFileLoader.fromFile(
                 rootProjectPath.resolve(DAM_FILE_NAME),
                 DAM_COURSE_NAME,
                 DAM_FILE_SEPARATOR,
                 CITY_FILTER);
+
         System.out.println("---------------------DAM-----------------------");
 
         System.out.println("---------------------DAW-----------------------");
-        Course dawCourse = FileReader.createCourseFromFile(
+        Course dawCourse = CourseFileLoader.fromFile(
                 rootProjectPath.resolve(DAW_FILE_NAME),
                 DAW_COURSE_NAME,
                 DAW_FILE_SEPARATOR,
@@ -78,18 +83,18 @@ public class Main {
                 dawCourse);
 
         //Binario conjunto
-        coursesBinaryFileWriter.saveFile(courses, outputPath.resolve(COURSES_DAT));
+        coursesBinaryFileWriter.write(courses, outputPath.resolve(COURSES_DAT));
 
         //JSON conjunto
         CreateCourseJsonFileDto dto = new CreateCourseJsonFileDto();
         dto.courses = courses;
-        coursesJsonFileWriter.saveFile(dto, outputPath.resolve(COURSES_JSON));
+        coursesJsonFileWriter.write(dto, outputPath.resolve(COURSES_JSON));
 
         //JSON separados
-        courseJsonFileWriter.saveFile(damCourse, outputPath.resolve(DAM_JSON));
-        courseJsonFileWriter.saveFile(dawCourse, outputPath.resolve(DAW_JSON));
+        courseJsonFileWriter.write(damCourse, outputPath.resolve(DAM_JSON));
+        courseJsonFileWriter.write(dawCourse, outputPath.resolve(DAW_JSON));
 
         //XML
-        courseXmlFileWriter.saveFile(dto,outputPath.resolve(COURSES_XML));
+        courseXmlFileWriter.write(dto,outputPath.resolve(COURSES_XML));
     }
 }
