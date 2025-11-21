@@ -2,11 +2,16 @@ package es.cifpcarlos3;
 
 import es.cifpcarlos3.file.dtos.CreateCourseJsonFileDto;
 import es.cifpcarlos3.file.CourseFileLoader;
+import es.cifpcarlos3.file.readers.BinaryFileReader;
+import es.cifpcarlos3.file.readers.FileReader;
+import es.cifpcarlos3.file.readers.JsonFileReader;
+import es.cifpcarlos3.file.readers.XmlFileReader;
 import es.cifpcarlos3.file.writers.BinaryFileWriter;
 import es.cifpcarlos3.file.writers.FileWriter;
 import es.cifpcarlos3.file.writers.JsonFileWriter;
 import es.cifpcarlos3.file.writers.XmlFileWriter;
 import es.cifpcarlos3.models.Course;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -49,13 +54,19 @@ public class Main {
 
         //Binario
         FileWriter<List<Course>> coursesBinaryFileWriter = new BinaryFileWriter<>();
+        FileReader<List<Course>> coursesBinaryFileReader = new BinaryFileReader<>();
 
         //JSON
         FileWriter<CreateCourseJsonFileDto> coursesJsonFileWriter = new JsonFileWriter<>();
         FileWriter<Course> courseJsonFileWriter = new JsonFileWriter<>();
 
+        FileReader<CreateCourseJsonFileDto> coursesJsonFileReader = new JsonFileReader<>(CreateCourseJsonFileDto.class);
+        FileReader<Course> courseJsonFileReader = new JsonFileReader<>(Course.class);
+
         //XML
         FileWriter<CreateCourseJsonFileDto> courseXmlFileWriter = new XmlFileWriter<>();
+        FileReader<CreateCourseJsonFileDto> coursesXmlFileReader =new XmlFileReader<>(CreateCourseJsonFileDto.class);
+
 
 
         //Leer fichero de DAM
@@ -96,5 +107,16 @@ public class Main {
 
         //XML
         courseXmlFileWriter.write(dto,outputPath.resolve(COURSES_XML));
+
+
+        //Lectura de ficheros
+        System.out.println(coursesBinaryFileReader.read(outputPath.resolve(COURSES_DAT)));
+        System.out.println(coursesJsonFileReader.read(outputPath.resolve(COURSES_JSON)));
+        System.out.println(coursesXmlFileReader.read(outputPath.resolve(COURSES_XML)));
+
+        System.out.println(courseJsonFileReader.read(outputPath.resolve(DAM_JSON)));
+        System.out.println(courseJsonFileReader.read(outputPath.resolve(DAW_JSON)));
+
+
     }
 }
