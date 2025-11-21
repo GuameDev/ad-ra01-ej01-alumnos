@@ -15,24 +15,28 @@ import java.util.List;
 
 public class Main {
 
+    //Rutas de los ficheros originales
     private static final String DAM_FILE_NAME = "lista_alumnado_DAM2.txt";
     private static final String DAW_FILE_NAME = "lista_alumnado_DAW1.csv";
 
+    //Nombre de los cursos
     private static final String DAM_COURSE_NAME = "DAM";
     private static final String DAW_COURSE_NAME = "DAW";
 
+    //Separador utilizado en los ficheros originales
     private static final String DAM_FILE_SEPARATOR = ",";
     private static final String DAW_FILE_SEPARATOR = ";";
 
+    //Filtros de los alumnos
     private static final String CITY_FILTER = "Cartagena";
 
+    //Ruta de la carpeta de los ficheros de salida
     private static final String OUTPUT_FOLDER = "salida";
 
-    //Nombres de fichero
+    //Ruta de los ficheros de salida
     private static final String COURSES_DAT = "cursos.dat";
     private static final String COURSES_JSON = "cursos.json";
     public static final String COURSES_XML = "cursos.xml";
-
     private static final String DAM_JSON = "dam2.json";
     private static final String DAW_JSON = "daw1.json";
 
