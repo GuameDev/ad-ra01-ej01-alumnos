@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
