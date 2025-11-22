@@ -1,89 +1,146 @@
 package es.cifpcarlos3;
 
-import es.cifpcarlos3.file.dtos.CreateCourseJsonFileDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import es.cifpcarlos3.file.CourseFileLoader;
+import es.cifpcarlos3.file.dtos.CreateCourseFileDto;
+import es.cifpcarlos3.file.readers.BinaryFileReader;
 import es.cifpcarlos3.file.readers.FileReader;
+import es.cifpcarlos3.file.readers.JsonFileReader;
+import es.cifpcarlos3.file.readers.XmlFileReader;
 import es.cifpcarlos3.file.writers.BinaryFileWriter;
 import es.cifpcarlos3.file.writers.FileWriter;
 import es.cifpcarlos3.file.writers.JsonFileWriter;
 import es.cifpcarlos3.file.writers.XmlFileWriter;
 import es.cifpcarlos3.models.Course;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.dataformat.xml.XmlMapper;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
-
 
 
 public class Main {
 
+    public static final String COURSES_XML = "cursos.xml";
+    //Rutas de los ficheros originales
     private static final String DAM_FILE_NAME = "lista_alumnado_DAM2.txt";
     private static final String DAW_FILE_NAME = "lista_alumnado_DAW1.csv";
-
+    //Nombre de los cursos
     private static final String DAM_COURSE_NAME = "DAM";
     private static final String DAW_COURSE_NAME = "DAW";
-
+    //Separador utilizado en los ficheros originales
     private static final String DAM_FILE_SEPARATOR = ",";
     private static final String DAW_FILE_SEPARATOR = ";";
-
+    //Filtros de los alumnos
     private static final String CITY_FILTER = "Cartagena";
-
+    //Ruta de la carpeta de los ficheros de salida
     private static final String OUTPUT_FOLDER = "salida";
-
-    //Nombres de fichero
+    //Ruta de los ficheros de salida
     private static final String COURSES_DAT = "cursos.dat";
     private static final String COURSES_JSON = "cursos.json";
-    public static final String COURSES_XML = "cursos.xml";
-
     private static final String DAM_JSON = "dam2.json";
     private static final String DAW_JSON = "daw1.json";
 
+    //Formato de la fecha por defecto
+    private static final String DATE_TIME_PATTERN = "dd-MM-yyyy HH:mm:ss";
 
     public static void main(String[] args) {
+        //Ruta por defecto del proyecto
         Path rootProjectPath = Paths.get("").toAbsolutePath();
+
+        //Ruta de la carpeta de salida
         Path outputPath = rootProjectPath.resolve(OUTPUT_FOLDER);
 
         //Binario
-        FileWriter<List<Course>> coursesBinaryFileWriter = new BinaryFileWriter<>();
+        FileWriter<CreateCourseFileDto> coursesBinaryFileWriter = new BinaryFileWriter<>();
+        FileReader<CreateCourseFileDto> coursesBinaryFileReader = new BinaryFileReader<>(CreateCourseFileDto.class);
 
         //JSON
-        FileWriter<CreateCourseJsonFileDto> coursesJsonFileWriter = new JsonFileWriter<>();
-        FileWriter<Course> courseJsonFileWriter = new JsonFileWriter<>();
+        var jsonMapper = buildJsonMapper();
+
+        FileWriter<CreateCourseFileDto> coursesJsonFileWriter = new JsonFileWriter<>(jsonMapper);
+        FileWriter<Course> courseJsonFileWriter = new JsonFileWriter<>(jsonMapper);
+
+        FileReader<CreateCourseFileDto> coursesJsonFileReader = new JsonFileReader<>(CreateCourseFileDto.class, jsonMapper);
+        FileReader<Course> courseJsonFileReader = new JsonFileReader<>(Course.class, jsonMapper);
 
         //XML
-        FileWriter<CreateCourseJsonFileDto> courseXmlFileWriter = new XmlFileWriter<>();
+        var xmlMapper = buildXmlMapper();
+
+        FileWriter<CreateCourseFileDto> courseXmlFileWriter = new XmlFileWriter<>(xmlMapper);
+        FileReader<CreateCourseFileDto> coursesXmlFileReader = new XmlFileReader<>(CreateCourseFileDto.class, xmlMapper);
 
 
+        //Leer fichero de DAM
         System.out.println("---------------------DAM-----------------------");
-        Course damCourse = FileReader.createCourseFromFile(
+
+        Course damCourse = CourseFileLoader.fromFile(
                 rootProjectPath.resolve(DAM_FILE_NAME),
                 DAM_COURSE_NAME,
                 DAM_FILE_SEPARATOR,
                 CITY_FILTER);
 
+        System.out.println("---------------------DAM-----------------------");
+
         System.out.println("---------------------DAW-----------------------");
-        Course dawCourse = FileReader.createCourseFromFile(
+        Course dawCourse = CourseFileLoader.fromFile(
                 rootProjectPath.resolve(DAW_FILE_NAME),
                 DAW_COURSE_NAME,
                 DAW_FILE_SEPARATOR,
                 CITY_FILTER);
+        System.out.println("---------------------DAW-----------------------");
 
+        //Lista de cursos unificada
         List<Course> courses = List.of(
                 damCourse,
                 dawCourse);
 
+        CreateCourseFileDto coursesDto = new CreateCourseFileDto();
+        coursesDto.courses = courses;
+
         //Binario conjunto
-        coursesBinaryFileWriter.saveFile(courses, outputPath.resolve(COURSES_DAT));
+        coursesBinaryFileWriter.write(coursesDto, outputPath.resolve(COURSES_DAT));
 
         //JSON conjunto
-        CreateCourseJsonFileDto dto = new CreateCourseJsonFileDto();
-        dto.courses = courses;
-
-        coursesJsonFileWriter.saveFile(dto, outputPath.resolve(COURSES_JSON));
+        coursesJsonFileWriter.write(coursesDto, outputPath.resolve(COURSES_JSON));
 
         //JSON separados
-        courseJsonFileWriter.saveFile(damCourse, outputPath.resolve(DAM_JSON));
-        courseJsonFileWriter.saveFile(dawCourse, outputPath.resolve(DAW_JSON));
+        courseJsonFileWriter.write(damCourse, outputPath.resolve(DAM_JSON));
+        courseJsonFileWriter.write(dawCourse, outputPath.resolve(DAW_JSON));
 
         //XML
-        courseXmlFileWriter.saveFile(dto,outputPath.resolve(COURSES_XML));
+        courseXmlFileWriter.write(coursesDto, outputPath.resolve(COURSES_XML));
+
+
+        //Lectura de ficheros
+        System.out.println(coursesBinaryFileReader.read(outputPath.resolve(COURSES_DAT)));
+        System.out.println(coursesJsonFileReader.read(outputPath.resolve(COURSES_JSON)));
+        System.out.println(coursesXmlFileReader.read(outputPath.resolve(COURSES_XML)));
+
+        System.out.println(courseJsonFileReader.read(outputPath.resolve(DAM_JSON)));
+        System.out.println(courseJsonFileReader.read(outputPath.resolve(DAW_JSON)));
+    }
+
+    //Configuramos el mapper para poner un formato por defecto para LocalDateTime
+    private static XmlMapper buildXmlMapper() {
+        return XmlMapper.builder()
+                .withConfigOverride(LocalDateTime.class, cfg ->
+                        cfg.setFormat(JsonFormat.Value.forPattern(DATE_TIME_PATTERN)))
+                .enable(SerializationFeature.INDENT_OUTPUT)
+                .build();
+    }
+
+    //Configuramos el mapper para poner un formato por defecto para LocalDateTime
+    private static JsonMapper buildJsonMapper() {
+        return JsonMapper.builder()
+                .withConfigOverride(LocalDateTime.class, cfg ->
+                        cfg.setFormat(JsonFormat.Value.forPattern(DATE_TIME_PATTERN)))
+                .enable(SerializationFeature.WRAP_ROOT_VALUE)
+                .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
+                .build();
     }
 }
