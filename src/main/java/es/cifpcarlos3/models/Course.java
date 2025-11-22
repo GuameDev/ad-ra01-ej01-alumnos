@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import tools.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import tools.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -26,6 +28,8 @@ public class Course implements Serializable {
     private String name;
 
     @JsonProperty("alumnos")
+    @JacksonXmlElementWrapper(localName = "alumnos")
+    @JacksonXmlProperty(localName = "alumno")
     private List<Student> students = new ArrayList<>();
 
     @Serial

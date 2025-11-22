@@ -1,23 +1,16 @@
 package es.cifpcarlos3.file.readers;
 
-import tools.jackson.databind.DeserializationFeature;
-import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.json.JsonMapper;
 
 import java.nio.file.Path;
 
 public class JsonFileReader<T> implements FileReader<T> {
-
-
     private final JsonMapper mapper;
     private final Class<T> type;
 
-    public JsonFileReader(Class<T> type) {
+    public JsonFileReader(Class<T> type, JsonMapper mapper) {
         this.type = type;
-        this.mapper = JsonMapper.builder()
-                .enable(SerializationFeature.WRAP_ROOT_VALUE)
-                .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-                .build();
+        this.mapper = mapper;
     }
 
     @Override

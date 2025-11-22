@@ -1,6 +1,6 @@
 package es.cifpcarlos3;
 
-import es.cifpcarlos3.file.dtos.CreateCourseJsonFileDto;
+import es.cifpcarlos3.file.dtos.CreateCourseFileDto;
 import es.cifpcarlos3.file.CourseFileLoader;
 import es.cifpcarlos3.file.readers.BinaryFileReader;
 import es.cifpcarlos3.file.readers.FileReader;
@@ -11,11 +11,14 @@ import es.cifpcarlos3.file.writers.FileWriter;
 import es.cifpcarlos3.file.writers.JsonFileWriter;
 import es.cifpcarlos3.file.writers.XmlFileWriter;
 import es.cifpcarlos3.models.Course;
+import tools.jackson.databind.DeserializationFeature;
+import tools.jackson.databind.SerializationFeature;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.dataformat.xml.XmlMapper;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-
 
 
 public class Main {
@@ -53,20 +56,28 @@ public class Main {
         Path outputPath = rootProjectPath.resolve(OUTPUT_FOLDER);
 
         //Binario
-        FileWriter<List<Course>> coursesBinaryFileWriter = new BinaryFileWriter<>();
-        FileReader<List<Course>> coursesBinaryFileReader = new BinaryFileReader<>();
+        FileWriter<CreateCourseFileDto> coursesBinaryFileWriter = new BinaryFileWriter<>();
+        FileReader<CreateCourseFileDto> coursesBinaryFileReader = new BinaryFileReader<>(CreateCourseFileDto.class);
 
         //JSON
-        FileWriter<CreateCourseJsonFileDto> coursesJsonFileWriter = new JsonFileWriter<>();
-        FileWriter<Course> courseJsonFileWriter = new JsonFileWriter<>();
+        var jsonMapper = JsonMapper.builder()
+                .enable(SerializationFeature.WRAP_ROOT_VALUE)
+                .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
+                .build();
 
-        FileReader<CreateCourseJsonFileDto> coursesJsonFileReader = new JsonFileReader<>(CreateCourseJsonFileDto.class);
-        FileReader<Course> courseJsonFileReader = new JsonFileReader<>(Course.class);
+        FileWriter<CreateCourseFileDto> coursesJsonFileWriter = new JsonFileWriter<>(jsonMapper);
+        FileWriter<Course> courseJsonFileWriter = new JsonFileWriter<>(jsonMapper);
+
+        FileReader<CreateCourseFileDto> coursesJsonFileReader = new JsonFileReader<>(CreateCourseFileDto.class, jsonMapper);
+        FileReader<Course> courseJsonFileReader = new JsonFileReader<>(Course.class, jsonMapper);
 
         //XML
-        FileWriter<CreateCourseJsonFileDto> courseXmlFileWriter = new XmlFileWriter<>();
-        FileReader<CreateCourseJsonFileDto> coursesXmlFileReader =new XmlFileReader<>(CreateCourseJsonFileDto.class);
+        var xmlMapper = XmlMapper.builder()
+                .enable(SerializationFeature.INDENT_OUTPUT)
+                .build();
 
+        FileWriter<CreateCourseFileDto> courseXmlFileWriter = new XmlFileWriter<>(xmlMapper);
+        FileReader<CreateCourseFileDto> coursesXmlFileReader = new XmlFileReader<>(CreateCourseFileDto.class, xmlMapper);
 
 
         //Leer fichero de DAM
@@ -93,20 +104,21 @@ public class Main {
                 damCourse,
                 dawCourse);
 
+        CreateCourseFileDto coursesDto = new CreateCourseFileDto();
+        coursesDto.courses = courses;
+
         //Binario conjunto
-        coursesBinaryFileWriter.write(courses, outputPath.resolve(COURSES_DAT));
+        coursesBinaryFileWriter.write(coursesDto, outputPath.resolve(COURSES_DAT));
 
         //JSON conjunto
-        CreateCourseJsonFileDto dto = new CreateCourseJsonFileDto();
-        dto.courses = courses;
-        coursesJsonFileWriter.write(dto, outputPath.resolve(COURSES_JSON));
+        coursesJsonFileWriter.write(coursesDto, outputPath.resolve(COURSES_JSON));
 
         //JSON separados
         courseJsonFileWriter.write(damCourse, outputPath.resolve(DAM_JSON));
         courseJsonFileWriter.write(dawCourse, outputPath.resolve(DAW_JSON));
 
         //XML
-        courseXmlFileWriter.write(dto,outputPath.resolve(COURSES_XML));
+        courseXmlFileWriter.write(coursesDto, outputPath.resolve(COURSES_XML));
 
 
         //Lectura de ficheros

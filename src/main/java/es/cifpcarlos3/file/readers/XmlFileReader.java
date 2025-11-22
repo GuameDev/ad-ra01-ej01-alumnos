@@ -1,8 +1,6 @@
 package es.cifpcarlos3.file.readers;
 
-import tools.jackson.databind.SerializationFeature;
 import tools.jackson.dataformat.xml.XmlMapper;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -13,11 +11,9 @@ public class XmlFileReader<T> implements FileReader<T> {
     private final Class<T> type;
     private final XmlMapper xmlMapper;
 
-    public XmlFileReader(Class<T> type) {
+    public XmlFileReader(Class<T> type, XmlMapper mapper) {
         this.type = type;
-        this.xmlMapper = XmlMapper.builder()
-                .enable(SerializationFeature.INDENT_OUTPUT)
-                .build();
+        this.xmlMapper = mapper;
     }
 
     @Override
