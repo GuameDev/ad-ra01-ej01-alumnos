@@ -2,6 +2,7 @@ package es.cifpcarlos3.file.writers;
 
 import es.cifpcarlos3.file.helpers.FileHelper;
 import tools.jackson.dataformat.xml.XmlMapper;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -29,6 +30,4 @@ public class XmlFileWriter<T> implements FileWriter<T> {
             throw new RuntimeException(e);
         }
     }
-
-
 }

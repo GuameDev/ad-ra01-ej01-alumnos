@@ -1,7 +1,8 @@
 package es.cifpcarlos3;
 
-import es.cifpcarlos3.file.dtos.CreateCourseFileDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import es.cifpcarlos3.file.CourseFileLoader;
+import es.cifpcarlos3.file.dtos.CreateCourseFileDto;
 import es.cifpcarlos3.file.readers.BinaryFileReader;
 import es.cifpcarlos3.file.readers.FileReader;
 import es.cifpcarlos3.file.readers.JsonFileReader;
@@ -18,35 +19,34 @@ import tools.jackson.dataformat.xml.XmlMapper;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.List;
 
 
 public class Main {
 
+    public static final String COURSES_XML = "cursos.xml";
     //Rutas de los ficheros originales
     private static final String DAM_FILE_NAME = "lista_alumnado_DAM2.txt";
     private static final String DAW_FILE_NAME = "lista_alumnado_DAW1.csv";
-
     //Nombre de los cursos
     private static final String DAM_COURSE_NAME = "DAM";
     private static final String DAW_COURSE_NAME = "DAW";
-
     //Separador utilizado en los ficheros originales
     private static final String DAM_FILE_SEPARATOR = ",";
     private static final String DAW_FILE_SEPARATOR = ";";
-
     //Filtros de los alumnos
     private static final String CITY_FILTER = "Cartagena";
-
     //Ruta de la carpeta de los ficheros de salida
     private static final String OUTPUT_FOLDER = "salida";
-
     //Ruta de los ficheros de salida
     private static final String COURSES_DAT = "cursos.dat";
     private static final String COURSES_JSON = "cursos.json";
-    public static final String COURSES_XML = "cursos.xml";
     private static final String DAM_JSON = "dam2.json";
     private static final String DAW_JSON = "daw1.json";
+
+    //Formato de la fecha por defecto
+    private static final String DATE_TIME_PATTERN = "dd-MM-yyyy HH:mm:ss";
 
     public static void main(String[] args) {
         //Ruta por defecto del proyecto
@@ -60,10 +60,7 @@ public class Main {
         FileReader<CreateCourseFileDto> coursesBinaryFileReader = new BinaryFileReader<>(CreateCourseFileDto.class);
 
         //JSON
-        var jsonMapper = JsonMapper.builder()
-                .enable(SerializationFeature.WRAP_ROOT_VALUE)
-                .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-                .build();
+        var jsonMapper = buildJsonMapper();
 
         FileWriter<CreateCourseFileDto> coursesJsonFileWriter = new JsonFileWriter<>(jsonMapper);
         FileWriter<Course> courseJsonFileWriter = new JsonFileWriter<>(jsonMapper);
@@ -72,9 +69,7 @@ public class Main {
         FileReader<Course> courseJsonFileReader = new JsonFileReader<>(Course.class, jsonMapper);
 
         //XML
-        var xmlMapper = XmlMapper.builder()
-                .enable(SerializationFeature.INDENT_OUTPUT)
-                .build();
+        var xmlMapper = buildXmlMapper();
 
         FileWriter<CreateCourseFileDto> courseXmlFileWriter = new XmlFileWriter<>(xmlMapper);
         FileReader<CreateCourseFileDto> coursesXmlFileReader = new XmlFileReader<>(CreateCourseFileDto.class, xmlMapper);
@@ -128,7 +123,24 @@ public class Main {
 
         System.out.println(courseJsonFileReader.read(outputPath.resolve(DAM_JSON)));
         System.out.println(courseJsonFileReader.read(outputPath.resolve(DAW_JSON)));
+    }
 
+    //Configuramos el mapper para poner un formato por defecto para LocalDateTime
+    private static XmlMapper buildXmlMapper() {
+        return XmlMapper.builder()
+                .withConfigOverride(LocalDateTime.class, cfg ->
+                        cfg.setFormat(JsonFormat.Value.forPattern(DATE_TIME_PATTERN)))
+                .enable(SerializationFeature.INDENT_OUTPUT)
+                .build();
+    }
 
+    //Configuramos el mapper para poner un formato por defecto para LocalDateTime
+    private static JsonMapper buildJsonMapper() {
+        return JsonMapper.builder()
+                .withConfigOverride(LocalDateTime.class, cfg ->
+                        cfg.setFormat(JsonFormat.Value.forPattern(DATE_TIME_PATTERN)))
+                .enable(SerializationFeature.WRAP_ROOT_VALUE)
+                .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
+                .build();
     }
 }

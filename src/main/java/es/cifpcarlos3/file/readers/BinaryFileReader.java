@@ -1,9 +1,11 @@
 package es.cifpcarlos3.file.readers;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.nio.file.Path;
-public class BinaryFileReader<T> implements FileReader<T> {
 
+public class BinaryFileReader<T> implements FileReader<T> {
 
     private final Class<T> type;
 

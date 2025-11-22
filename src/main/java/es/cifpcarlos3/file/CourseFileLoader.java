@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CourseFileLoader {
     public static Course fromFile(Path filePath, String courseName, String fileSeparator, String filter) {
@@ -29,7 +29,7 @@ public class CourseFileLoader {
                 String city = studentParts[3].trim();
                 int age = Integer.parseInt(studentParts[4].trim());
 
-                Student student = new Student(id, surnames, name, city, age, LocalDate.now());
+                Student student = new Student(id, surnames, name, city, age, LocalDateTime.now());
                 if (city.equalsIgnoreCase(filter)) {
                     course.addStudent(student);
                     System.out.println("+ El Alumno " + student + " ha sido añadido");
